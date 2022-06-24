@@ -1,0 +1,23 @@
+func restapiRead()
+    {
+        var request = URLRequest(url: URL(string: "https://reqres.in/api/users?page=1")!)
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { data, response, error -> Void in
+            print(response!)
+            do {
+                    let json = try JSONSerialization.jsonObject(with: data!) as! Dictionary<String, AnyObject>
+
+                 DispatchQueue.main.async {
+                self.mytv.text =  json.description
+                   }
+                }
+         
+            catch {
+                print("error")
+            }
+        })
+
+        task.resume()
+      }
