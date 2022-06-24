@@ -1,0 +1,26 @@
+ // Custom UITableViewCell
+class SampleTableViewCell: UITableViewCell {
+    var myClosure: (() -> Void)?
+}
+Copy
+class Sample: UIViewController {
+    var value: Int = 0
+    let tableView = UITableView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .blue
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(SampleTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view.addSubview(tableView)
+    }
+}
+
+extension Sample: UITableViewDataSource {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SampleTableViewCell
+    cell.myClosure = {
+        print(self.value)
+    }
+    return cell
+}
