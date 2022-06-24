@@ -1,0 +1,5 @@
+cell.myClosure = { [weak self] in
+    print(self?.value)
+}
+Copy
+
